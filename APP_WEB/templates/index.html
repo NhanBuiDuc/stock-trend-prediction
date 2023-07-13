@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Chart</title>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/indicators-all.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+    <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../static/js/chart.js"></script>
+    <script src="../static/js/index.js"></script>
+    <script src="https://kit.fontawesome.com/90c8120d4c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/chart.css" />
+    <link rel="stylesheet" href="../static/css/analysisholo.css" />
+    <link rel="stylesheet" href="../static/css/style.css"/>
+
+</head>
+    
+<body>
+    <!-- CANDLE STICK CHART -->
+    <nav class="navigation is-flex p-3">
+        <div class="logo-holder logo-1">
+            <a href="">
+              <h3>Stock Market</h3>
+              <p>Viewing stock details</p>
+            </a>
+          </div>
+    </nav>
+    <section class="section" id="mainsection">
+        <div class="main-wrapper is-transparent">
+            <div class="selectors-container">
+                <div class="col">
+                    <label class="title is-4" for="overlays">Overlays:</label>
+                    <select class="left-select select customized mt-4" id="overlays">
+                        <option value="abands">Acceleration Bands</option>
+                        <option value="bb">Bollinger Bands</option>
+                        <option value="dema">DEMA (Double Exponential Moving Average)</option>
+                        <option value="ema">EMA (Exponential Moving Average)</option>
+                        <option value="ikh">Ichimoku Kinko Hyo</option>
+                        <option value="keltnerchannels">Keltner Channels</option>
+                        <option value="linearRegression">Linear Regression</option>
+                        <option value="pivotpoints">Pivot Points</option>
+                        <option value="pc" selected="selected">Price Channel</option>
+                        <option value="priceenvelopes">Price Envelopes</option>
+                        <option value="psar">PSAR (Parabolic SAR)</option>
+                        <option value="sma">SMA (Simple Moving Average)</option>
+                        <option value="supertrend">Super Trend</option>
+                        <option value="tema">TEMA (Triple Exponential Moving Average)</option>
+                        <option value="vbp">VbP (Volume by Price)</option>
+                        <option value="vwap">WMA (Weighted Moving Average)</option>
+                        <option value="wma">VWAP (Volume Weighted Average Price)</option>
+                        <option value="zigzag">Zig Zag</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="title is-4" for="oscillators">Oscillators:</label>
+                    <select class="right-select select customized mt-4" id="oscillators">
+                        <option value="apo">Absolute price indicator</option>
+                        <option value="ad">A/D (Accumulation/Distribution)</option>
+                        <option value="aroon">Aroon</option>
+                        <option value="aroonoscillator">Aroon oscillator</option>
+                        <option value="atr">ATR (Average True Range)</option>
+                        <option value="ao">Awesome oscillator</option>
+                        <option value="cci">CCI (Commodity Channel Index)</option>
+                        <option value="chaikin">Chaikin</option>
+                        <option value="cmf">CMF (Chaikin Money Flow)</option>
+                        <option value="disparityindex">Disparity Index</option>
+                        <option value="cmo">CMO (Chande Momentum Oscillator)</option>
+                        <option value="dmi">DMI (Directional Movement Index)</option>
+                        <option value="dpo">Detrended price</option>
+                        <option value="linearRegressionAngle">Linear Regression Angle</option>
+                        <option value="linearRegressionIntercept">Linear Regression Intercept</option>
+                        <option value="linearRegressionSlope">Linear Regression Slope</option>
+                        <option value="klinger">Klinger Oscillator</option>
+                        <option value="macd" selected="selected">MACD (Moving Average Convergence Divergence)</option>
+                        <option value="mfi">MFI (Money Flow Index)</option>
+                        <option value="momentum">Momentum</option>
+                        <option value="natr">NATR (Normalized Average True Range)</option>
+                        <option value="obv">OBV (On-Balance Volume)</option>
+                        <option value="ppo">Percentage Price oscillator</option>
+                        <option value="roc">RoC (Rate of Change)</option>
+                        <option value="rsi">RSI (Relative Strength Index)</option>
+                        <option value="slowstochastic">Slow Stochastic</option>
+                        <option value="stochastic">Stochastic</option>
+                        <option value="trix">TRIX</option>
+                        <option value="williamsr">Williams %R</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYSIS HOLO 
+      <figure class="highcharts-figure">
+        <div id="parent-container">
+          <div id="play-controls">
+            <button id="play-pause-button" class="fa fa-play" title="play"></button>
+            <input id="play-range" type="range" value="1999" min="1999" max="2023" />
+          </div>
+          <div id="container"></div>
+        </div>
+      </figure>
+      -->
+        <!-- HTML !-->
+        
+
+
+        <div id="loadingSection" class="is-hidden">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="title has-text-centered mb-6 is-hidden" id="titleSignal"></div>
+        
+        <div class="columns">
+            <div class="column is-6">
+                <div id="candlechart"></div>
+            </div>
+            
+            <div class="column is-6" style="font-size: 0.9rem;font-weight: bold; text-transform:uppercase">
+                <div class="is-flex is-justify-content-center mb-6">            
+
+                    <div class="is-flex mr-4">
+                        <div style="display:flex; margin-block:auto;">Output size:</div>
+                        <select id="outputsize" class="select customized mx-3">
+                            <option value="3">3</option>
+                            <option value="7">7</option>
+                            <option value="14">14</option>
+                        </select>
+                    </div>
+                    <!-- <div class="is-flex">
+                        <button class="button-17" role="button">Get Prediction</button>
+                    </div> -->
+                    <div class="is-flex mr-4">
+                        <div style="display:flex; margin-block:auto;margin-right: 1rem;margin-left: 0.625rem;">Date:</div>
+                        <input type="date" id="datePicker" value="2023-06-30" class="datePicker">
+                    </div>
+                    
+                </div>
+                <div class="is-6 flex-content-between">
+                    <div class="" style="padding-left:3.225rem; display:inline-flex; margin-block:auto;">
+                        <div style="margin-block:auto; padding-right:0.625rem">Current Price </div>
+                        <div class="price-box" id="currentPrice">120</div>
+                    </div>
+                    
+                    <div class="" style="padding-right:3.225rem; display:inline-flex; margin-block:auto;">
+                        <div style=" margin-block:auto; padding-right:0.625rem">Actual Price </div>
+                        <div class="price-box " id="actualPrice">180</div>
+                    </div>
+                    
+                </div>
+                <div class="table-container">
+                    <table class="styled-table table is-hidden" id="stockTable">
+                        <thead>
+                            <tr>
+                                <th class="has-text-white">Date</th>
+                                <th class="has-text-white">Symbol</th>
+                                <th class="has-text-white">LSTM</th>
+                                <th class="has-text-white">SVM</th>
+                                <th class="has-text-white">XGBoost</th>
+                                <th class="has-text-white">Random Forest</th>
+                                <th class="has-text-white">Ensemble</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01/07/2023</td>
+                                <td>AAPL</td>
+                                <td><i class="fa-solid fa-arrow-up" style="color: #62e5be;"> DOWN</i></td>
+                                <td><i class="fa-solid fa-arrow-down" style="color: #c81e1e;"> DOWN</i></td>
+                                <td><i class="fa-solid fa-arrow-down" style="color: #c81e1e;"> DOWN</i></td>
+                                <td><i class="fa-solid fa-arrow-up" style="color: #62e5be;"> DOWN</i></td>
+                                <td><i class="fa-solid fa-arrow-up" style="color: #62e5be;"> DOWN</i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="button-list main-func-buttons">
+            <button class="button-65 b-apple" role="button" onclick="loadJSON('AAPL_signal.json')">APPLE</button>
+            <button class="button-65 b-microsoft" role="button" onclick="loadJSON('MSFT_signal.json')">MICROSOFT</button>
+            <button class="button-65 b-tesla" role="button" onclick="loadJSON('TSLA_signal.json')">TESLA</button>
+            <button class="button-65 b-google" role="button" onclick="loadJSON('GOOGL_signal.json')">GOOGLE</button>
+            <button class="button-65 b-amazon" role="button" onclick="loadJSON('AMZN_signal.json')">AMAZON</button>
+        </div>
+    </section>
+
+    <section class="section section2 is-hidden">
+        <div class="container is-flex is-justify-content-space-around mb-6">
+            <div class="speedometer-container firsttable ">
+                <div class="speedometer-text">
+                    <div class="title" id="total1">Neutral</div>
+                </div>
+                <div class="speedometer-text-2">
+                    <div class="subtitle">Sell</div>
+                    <div class="subtitle" id="sell1">0</div>
+                </div>
+                <div class="speedometer-text-3">
+                    <div class="subtitle">Neutral</div>
+                    <div class="subtitle" id="neutral1">0</div>
+                </div>
+                <div class="speedometer-text-4">
+                    <div class="subtitle">Buy</div>
+                    <div class="subtitle" id="buy1">0</div>
+                </div>
+                <div class="center-point"></div>
+                <div class="speedometer-bottom-hide"></div>
+                <div class="arrow-container speed-90" id="arr1">
+                    <div class="arrow-wrapper">
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="speedometer-container ">
+                <div class="speedometer-text">
+                    <div class="title" id="total3">Buy</div>
+                </div>
+                <div class="speedometer-text-2">
+                    <div class="subtitle">Sell</div>
+                    <div class="subtitle" id="sell3">0</div>
+                </div>
+                <div class="speedometer-text-3">
+                    <div class="subtitle">Neutral</div>
+                    <div class="subtitle" id="neutral3">0</div>
+                </div>
+                <div class="speedometer-text-4">
+                    <div class="subtitle">Buy</div>
+                    <div class="subtitle" id="buy3">0</div>
+                </div>
+                <div class="center-point"></div>
+                <div class="speedometer-bottom-hide"></div>
+                <div class="arrow-container speed-90" id="arr3">
+                    <div class="arrow-wrapper">
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="speedometer-container ">
+                <div class="speedometer-text">
+                    <div class="title" id="total2">Buy</div>
+                </div>
+                <div class="speedometer-text-2">
+                    <div class="subtitle">Sell</div>
+                    <div class="subtitle" id="sell2">0</div>
+                </div>
+                <div class="speedometer-text-3">
+                    <div class="subtitle">Neutral</div>
+                    <div class="subtitle" id="neutral2">0</div>
+                </div>
+                <div class="speedometer-text-4">
+                    <div class="subtitle">Buy</div>
+                    <div class="subtitle" id="buy2">0</div>
+                </div>
+                <div class="center-point"></div>
+                <div class="speedometer-bottom-hide"></div>
+                <div class="arrow-container speed-90" id="arr2">
+                    <div class="arrow-wrapper">
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slidecontainer mb-6">
+            <select id="sel" class="option">
+                <option disabled selected value> -- select an option -- </option>
+            </select>
+            
+        </div>
+
+        <div class="container mb-6">
+          <div class="columns">
+            <div class="column">
+              <div class="title is-4">Oscilator Table</div>
+              <table id="table1" class="table is-fullwidth">
+                  <tr>
+                      <th>Name</th>
+                      <th>Value</th>
+                      <th>Action</th>
+                  </tr>
+              </table>
+            </div>
+
+            <div class="column">
+              <div class="title is-4">Average Moving Table</div>
+              <table id="table2" class="table is-fullwidth">
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Action</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <footer>
+        <section class="section p-3">
+            Building Stock Market Analysis Web Application using Machine Learning.
+        </section>
+    </footer>
+</body>
+
+<script>
+    function getValue() {
+
+        var outputElement = document.getElementById("outputsize");
+        var outputsize = outputElement.value;
+
+        return {
+            outputsize: outputsize
+        }
+    }
+    function loadJSON(filename) {
+        let mainsection = document.getElementById("mainsection");
+        let parentElem = document.querySelector(`.main-func-buttons`);
+        let loadingSection = document.getElementById("loadingSection");
+        let stockTable = document.getElementById("stockTable");
+        let section2 = document.querySelector(".section2");
+        let titleSignal = document.getElementById("titleSignal");
+
+        if (!parentElem.classList.contains("is-closed")) {
+            parentElem.classList.add("is-closed");
+            stockTable.classList.add("is-hidden");
+            section2.classList.add("is-hidden");
+            loadingSection.classList.remove("is-hidden");
+            loadingSection.classList.add("is-flex");
+        }
+
+        setTimeout(function () {
+            var symbol = filename.substring(0, filename.indexOf('_signal'));
+            chart.getData(filename)
+                .then(function (data) {
+                    // Get Data
+                    titleSignal.innerHTML = `${symbol}`;
+                    chart.currentData = data; // Store the loaded data in the chart object
+                    index.currentData = data; // Store the loaded data in the chart object
+
+                    chart.build(symbol); // Rebuild the chart using the new data
+                    index.build(symbol); // Rebuild the chart using the new data
+                    //chart.renderDataToTable(symbol);
+                    
+                    // UI Process (Hide Loading, Show Table, Show Chart,...)
+                    loadingSection.classList.add("is-hidden");
+                    loadingSection.classList.remove("is-flex");
+                    stockTable.classList.remove("is-hidden");
+                    section2.classList.remove("is-hidden");
+                    mainsection.classList.add("is-closed"); 
+
+                    let mainfuncbuttons = document.querySelector(".main-func-buttons");
+                    mainfuncbuttons.style.bottom = "2rem";
+                })
+                .catch(function (error) {
+                    console.error('Error:', error);
+                });
+        }, 2500)
+    }
+</script>
+
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        index.build();
+    });
+</script>
+
+</html>

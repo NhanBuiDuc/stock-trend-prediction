@@ -1,0 +1,870 @@
+2023-06-16 12:51:35{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "n_estimators": 5,
+        "criterion": "gini",
+        "max_depth": 3,
+        "min_samples_leaf": 2,
+        "random_state": 42,
+        "window_size": 14,
+        "output_step": 14,
+        "data_mode": 0,
+        "topk": 20,
+        "symbol": "AAPL",
+        "max_string_length": 0,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "n_estimators": [
+                5,
+                10,
+                100
+            ],
+            "criterion": [
+                "gini",
+                "entropy"
+            ],
+            "min_samples_leaf": [
+                2,
+                4,
+                6,
+                50
+            ],
+            "max_depth": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 300,
+        "learning_rate": 0.001,
+        "loss": "bce",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 50,
+        "patient": 500,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.0001
+    }
+}
+Train evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.76      0.88      0.82        51
+          UP       0.86      0.73      0.79        51
+
+    accuracy                           0.80       102
+   macro avg       0.81      0.80      0.80       102
+weighted avg       0.81      0.80      0.80       102
+
+Confusion matrix:
+[[45  6]
+ [14 37]]
+----------------------------------------------------------------------------------------------------
+Train evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 19.60784339904785
+-----------------------------------------------------------------------------------------------------
+Valid evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.56      0.64      0.60        22
+          UP       0.58      0.50      0.54        22
+
+    accuracy                           0.57        44
+   macro avg       0.57      0.57      0.57        44
+weighted avg       0.57      0.57      0.57        44
+
+Confusion matrix:
+[[14  8]
+ [11 11]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 43.181819915771484
+-----------------------------------------------------------------------------------------------------
+Test evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.42      0.79      0.55        14
+          UP       0.87      0.57      0.69        35
+
+    accuracy                           0.63        49
+   macro avg       0.65      0.68      0.62        49
+weighted avg       0.74      0.63      0.65        49
+
+Confusion matrix:
+[[11  3]
+ [15 20]]
+----------------------------------------------------------------------------------------------------
+Test evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 36.73469161987305
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.85      0.79      0.81        14
+          UP       0.80      0.86      0.83        14
+
+    accuracy                           0.82        28
+   macro avg       0.82      0.82      0.82        28
+weighted avg       0.82      0.82      0.82        28
+
+Confusion matrix:
+[[11  3]
+ [ 2 12]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 17.85714340209961
+-----------------------------------------------------------------------------------------------------
+2023-06-17 19:30:21{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "n_estimators": 5,
+        "criterion": "gini",
+        "max_depth": 8,
+        "min_samples_leaf": 2,
+        "random_state": 42,
+        "window_size": 14,
+        "output_step": 14,
+        "data_mode": 0,
+        "topk": 20,
+        "symbol": "AAPL",
+        "max_string_length": 10000,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "n_estimators": [
+                5,
+                10,
+                100
+            ],
+            "criterion": [
+                "gini",
+                "entropy"
+            ],
+            "min_samples_leaf": [
+                2,
+                4,
+                6,
+                50
+            ],
+            "max_depth": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 300,
+        "learning_rate": 0.001,
+        "loss": "bce",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 50,
+        "patient": 500,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.0001
+    }
+}
+Train evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.89      0.96      0.92        51
+          UP       0.96      0.88      0.92        51
+
+    accuracy                           0.92       102
+   macro avg       0.92      0.92      0.92       102
+weighted avg       0.92      0.92      0.92       102
+
+Confusion matrix:
+[[49  2]
+ [ 6 45]]
+----------------------------------------------------------------------------------------------------
+Train evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 7.843137741088867
+-----------------------------------------------------------------------------------------------------
+Valid evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.65      0.68      0.67        22
+          UP       0.67      0.64      0.65        22
+
+    accuracy                           0.66        44
+   macro avg       0.66      0.66      0.66        44
+weighted avg       0.66      0.66      0.66        44
+
+Confusion matrix:
+[[15  7]
+ [ 8 14]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 34.090911865234375
+-----------------------------------------------------------------------------------------------------
+Test evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.42      0.71      0.53        14
+          UP       0.84      0.60      0.70        35
+
+    accuracy                           0.63        49
+   macro avg       0.63      0.66      0.61        49
+weighted avg       0.72      0.63      0.65        49
+
+Confusion matrix:
+[[10  4]
+ [14 21]]
+----------------------------------------------------------------------------------------------------
+Test evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 36.73469161987305
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.83      0.71      0.77        14
+          UP       0.75      0.86      0.80        14
+
+    accuracy                           0.79        28
+   macro avg       0.79      0.79      0.78        28
+weighted avg       0.79      0.79      0.78        28
+
+Confusion matrix:
+[[10  4]
+ [ 2 12]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 21.428571701049805
+-----------------------------------------------------------------------------------------------------
+2023-06-17 19:32:08{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "n_estimators": 5,
+        "criterion": "gini",
+        "max_depth": 8,
+        "min_samples_leaf": 2,
+        "random_state": 42,
+        "window_size": 14,
+        "output_step": 14,
+        "data_mode": 0,
+        "topk": 20,
+        "symbol": "AAPL",
+        "max_string_length": 10000,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "n_estimators": [
+                5,
+                10,
+                100
+            ],
+            "criterion": [
+                "gini",
+                "entropy"
+            ],
+            "min_samples_leaf": [
+                2,
+                4,
+                6,
+                50
+            ],
+            "max_depth": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 300,
+        "learning_rate": 0.001,
+        "loss": "bce",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 50,
+        "patient": 500,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.0001
+    }
+}
+Train evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.92      0.94      0.93        51
+          UP       0.94      0.92      0.93        51
+
+    accuracy                           0.93       102
+   macro avg       0.93      0.93      0.93       102
+weighted avg       0.93      0.93      0.93       102
+
+Confusion matrix:
+[[48  3]
+ [ 4 47]]
+----------------------------------------------------------------------------------------------------
+Train evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 6.86274528503418
+-----------------------------------------------------------------------------------------------------
+Valid evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.67      0.82      0.73        22
+          UP       0.76      0.59      0.67        22
+
+    accuracy                           0.70        44
+   macro avg       0.72      0.70      0.70        44
+weighted avg       0.72      0.70      0.70        44
+
+Confusion matrix:
+[[18  4]
+ [ 9 13]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 29.545455932617188
+-----------------------------------------------------------------------------------------------------
+Test evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.38      0.71      0.50        14
+          UP       0.83      0.54      0.66        35
+
+    accuracy                           0.59        49
+   macro avg       0.61      0.63      0.58        49
+weighted avg       0.70      0.59      0.61        49
+
+Confusion matrix:
+[[10  4]
+ [16 19]]
+----------------------------------------------------------------------------------------------------
+Test evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 40.81632614135742
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate random_forest_AAPL_w14_o14_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.71      0.71      0.71        14
+          UP       0.71      0.71      0.71        14
+
+    accuracy                           0.71        28
+   macro avg       0.71      0.71      0.71        28
+weighted avg       0.71      0.71      0.71        28
+
+Confusion matrix:
+[[10  4]
+ [ 4 10]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate random_forest_AAPL_w14_o14_d0 BCE loss: 28.571430206298828
+-----------------------------------------------------------------------------------------------------

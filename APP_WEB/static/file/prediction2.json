@@ -1,0 +1,87 @@
+{
+  "AAPL": {
+    "svm": {
+      "3": "DOWN",
+      "7": "DOWN",
+      "14": "DOWN"
+    },
+    "random": {
+      "3": "DOWN",
+      "7": "UP",
+      "14": "DOWN"
+    },
+    "xgboost": {
+      "3": "UP",
+      "7": "DOWN",
+      "14": "DOWN"
+    }
+  },
+  "AMZN": {
+    "svm": {
+      "3": "UP",
+      "7": "DOWN",
+      "14": "DOWN"
+    },
+    "random": {
+      "3": "UP",
+      "7": "UP",
+      "14": "UP"
+    },
+    "xgboost": {
+      "3": "UP",
+      "7": "UP",
+      "14": "DOWN"
+    }
+  },
+  "GOOGL": {
+    "svm": {
+      "3": "UP",
+      "7": "DOWN",
+      "14": "DOWN"
+    },
+    "random": {
+      "3": "DOWN",
+      "7": "DOWN",
+      "14": "DOWN"
+    },
+    "xgboost": {
+      "3": "DOWN",
+      "7": "DOWN",
+      "14": "DOWN"
+    }
+  },
+  "MSFT": {
+    "svm": {
+      "3": "DOWN",
+      "7": "UP",
+      "14": "UP"
+    },
+    "random": {
+      "3": "DOWN",
+      "7": "DOWN",
+      "14": "DOWN"
+    },
+    "xgboost": {
+      "3": "DOWN",
+      "7": "UP",
+      "14": "DOWN"
+    }
+  },
+  "TSLA": {
+    "svm": {
+      "3": "DOWN",
+      "7": "DOWN",
+      "14": "UP"
+    },
+    "random": {
+      "3": "UP",
+      "7": "UP",
+      "14": "DOWN"
+    },
+    "xgboost": {
+      "3": "UP",
+      "7": "UP",
+      "14": "UP"
+    }
+  }
+}

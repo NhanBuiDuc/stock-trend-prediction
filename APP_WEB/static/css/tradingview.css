@@ -1,0 +1,15 @@
+#tradingview-chart {
+    display: flex;
+    justify-content: flex-start;
+    /* height: 100vh; */
+}
+.tradingview_49477{
+    width: 1600px;
+}
+.tradingview-widget-container {
+
+    display: flex;
+    width: 1750px;
+}
+
+

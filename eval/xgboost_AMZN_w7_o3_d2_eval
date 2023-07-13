@@ -1,0 +1,1525 @@
+2023-06-17 20:36:50{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "symbol": "AMZN",
+        "nhead": 3,
+        "n_estimators": 10,
+        "objective": "binary:logistic",
+        "max_depth": 4,
+        "learning_rate": 0.1,
+        "subsample": 0.9,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0,
+        "reg_lambda": 1,
+        "random_state": 42,
+        "window_size": 7,
+        "output_step": 3,
+        "data_mode": 2,
+        "topk": 10,
+        "max_string_length": 500
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 100,
+        "learning_rate": 0.001,
+        "loss": "focal",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 100,
+        "patient": 600,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.001,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "n_estimators": [
+                10,
+                15,
+                20
+            ],
+            "learning_rate": [
+                0.1,
+                0.01,
+                0.001,
+                0.0001
+            ],
+            "subsample": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "colsample_bytree": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "max_depth": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    }
+}
+Train evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.98      0.94      0.96        52
+          UP       0.94      0.98      0.96        50
+
+    accuracy                           0.96       102
+   macro avg       0.96      0.96      0.96       102
+weighted avg       0.96      0.96      0.96       102
+
+Confusion matrix:
+[[49  3]
+ [ 1 49]]
+----------------------------------------------------------------------------------------------------
+Train evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 3.9215688705444336
+-----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.67      0.70      0.68        23
+          UP       0.65      0.62      0.63        21
+
+    accuracy                           0.66        44
+   macro avg       0.66      0.66      0.66        44
+weighted avg       0.66      0.66      0.66        44
+
+Confusion matrix:
+[[16  7]
+ [ 8 13]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 34.090911865234375
+-----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.12      0.20        33
+          UP       0.45      0.89      0.60        27
+
+    accuracy                           0.47        60
+   macro avg       0.51      0.51      0.40        60
+weighted avg       0.52      0.47      0.38        60
+
+Confusion matrix:
+[[ 4 29]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 53.333335876464844
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.15      0.24        27
+          UP       0.51      0.89      0.65        27
+
+    accuracy                           0.52        54
+   macro avg       0.54      0.52      0.44        54
+weighted avg       0.54      0.52      0.44        54
+
+Confusion matrix:
+[[ 4 23]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 48.14814758300781
+-----------------------------------------------------------------------------------------------------
+2023-06-17 20:45:48{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "symbol": "AMZN",
+        "nhead": 3,
+        "n_estimators": 10,
+        "objective": "binary:logistic",
+        "max_depth": 4,
+        "learning_rate": 0.1,
+        "subsample": 0.9,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0,
+        "reg_lambda": 1,
+        "random_state": 42,
+        "window_size": 7,
+        "output_step": 3,
+        "data_mode": 2,
+        "topk": 10,
+        "max_string_length": 500
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 100,
+        "learning_rate": 0.001,
+        "loss": "focal",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 100,
+        "patient": 600,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.001,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "n_estimators": [
+                10,
+                15,
+                20
+            ],
+            "learning_rate": [
+                0.1,
+                0.01,
+                0.001,
+                0.0001
+            ],
+            "subsample": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "colsample_bytree": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "max_depth": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    }
+}
+Train evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.98      0.94      0.96        52
+          UP       0.94      0.98      0.96        50
+
+    accuracy                           0.96       102
+   macro avg       0.96      0.96      0.96       102
+weighted avg       0.96      0.96      0.96       102
+
+Confusion matrix:
+[[49  3]
+ [ 1 49]]
+----------------------------------------------------------------------------------------------------
+Train evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 3.9215688705444336
+-----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.67      0.70      0.68        23
+          UP       0.65      0.62      0.63        21
+
+    accuracy                           0.66        44
+   macro avg       0.66      0.66      0.66        44
+weighted avg       0.66      0.66      0.66        44
+
+Confusion matrix:
+[[16  7]
+ [ 8 13]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 34.090911865234375
+-----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.12      0.20        33
+          UP       0.45      0.89      0.60        27
+
+    accuracy                           0.47        60
+   macro avg       0.51      0.51      0.40        60
+weighted avg       0.52      0.47      0.38        60
+
+Confusion matrix:
+[[ 4 29]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 53.333335876464844
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.15      0.24        27
+          UP       0.51      0.89      0.65        27
+
+    accuracy                           0.52        54
+   macro avg       0.54      0.52      0.44        54
+weighted avg       0.54      0.52      0.44        54
+
+Confusion matrix:
+[[ 4 23]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 48.14814758300781
+-----------------------------------------------------------------------------------------------------
+2023-06-17 21:34:13{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "symbol": "AMZN",
+        "nhead": 3,
+        "n_estimators": 10,
+        "objective": "binary:logistic",
+        "max_depth": 4,
+        "learning_rate": 0.1,
+        "subsample": 0.9,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0,
+        "reg_lambda": 1,
+        "random_state": 42,
+        "window_size": 7,
+        "output_step": 3,
+        "data_mode": 2,
+        "topk": 10,
+        "max_string_length": 500
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 100,
+        "learning_rate": 0.001,
+        "loss": "focal",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 100,
+        "patient": 600,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.001,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "n_estimators": [
+                10,
+                15,
+                20
+            ],
+            "learning_rate": [
+                0.1,
+                0.01,
+                0.001,
+                0.0001
+            ],
+            "subsample": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "colsample_bytree": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "max_depth": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    }
+}
+Train evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.98      0.94      0.96        52
+          UP       0.94      0.98      0.96        50
+
+    accuracy                           0.96       102
+   macro avg       0.96      0.96      0.96       102
+weighted avg       0.96      0.96      0.96       102
+
+Confusion matrix:
+[[49  3]
+ [ 1 49]]
+----------------------------------------------------------------------------------------------------
+Train evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 3.9215688705444336
+-----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.67      0.70      0.68        23
+          UP       0.65      0.62      0.63        21
+
+    accuracy                           0.66        44
+   macro avg       0.66      0.66      0.66        44
+weighted avg       0.66      0.66      0.66        44
+
+Confusion matrix:
+[[16  7]
+ [ 8 13]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 34.090911865234375
+-----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.12      0.20        33
+          UP       0.45      0.89      0.60        27
+
+    accuracy                           0.47        60
+   macro avg       0.51      0.51      0.40        60
+weighted avg       0.52      0.47      0.38        60
+
+Confusion matrix:
+[[ 4 29]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 53.333335876464844
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.15      0.24        27
+          UP       0.51      0.89      0.65        27
+
+    accuracy                           0.52        54
+   macro avg       0.54      0.52      0.44        54
+weighted avg       0.54      0.52      0.44        54
+
+Confusion matrix:
+[[ 4 23]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 48.14814758300781
+-----------------------------------------------------------------------------------------------------
+2023-06-17 21:40:40{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "symbol": "AMZN",
+        "nhead": 3,
+        "n_estimators": 10,
+        "objective": "binary:logistic",
+        "max_depth": 4,
+        "learning_rate": 0.1,
+        "subsample": 0.9,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0,
+        "reg_lambda": 1,
+        "random_state": 42,
+        "window_size": 7,
+        "output_step": 3,
+        "data_mode": 2,
+        "topk": 10,
+        "max_string_length": 500
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 100,
+        "learning_rate": 0.001,
+        "loss": "focal",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 100,
+        "patient": 600,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.001,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "n_estimators": [
+                10,
+                15,
+                20
+            ],
+            "learning_rate": [
+                0.1,
+                0.01,
+                0.001,
+                0.0001
+            ],
+            "subsample": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "colsample_bytree": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "max_depth": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    }
+}
+Train evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.98      0.94      0.96        52
+          UP       0.94      0.98      0.96        50
+
+    accuracy                           0.96       102
+   macro avg       0.96      0.96      0.96       102
+weighted avg       0.96      0.96      0.96       102
+
+Confusion matrix:
+[[49  3]
+ [ 1 49]]
+----------------------------------------------------------------------------------------------------
+Train evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 3.9215688705444336
+-----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.67      0.70      0.68        23
+          UP       0.65      0.62      0.63        21
+
+    accuracy                           0.66        44
+   macro avg       0.66      0.66      0.66        44
+weighted avg       0.66      0.66      0.66        44
+
+Confusion matrix:
+[[16  7]
+ [ 8 13]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 34.090911865234375
+-----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.12      0.20        33
+          UP       0.45      0.89      0.60        27
+
+    accuracy                           0.47        60
+   macro avg       0.51      0.51      0.40        60
+weighted avg       0.52      0.47      0.38        60
+
+Confusion matrix:
+[[ 4 29]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 53.333335876464844
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.15      0.24        27
+          UP       0.51      0.89      0.65        27
+
+    accuracy                           0.52        54
+   macro avg       0.54      0.52      0.44        54
+weighted avg       0.54      0.52      0.44        54
+
+Confusion matrix:
+[[ 4 23]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 48.14814758300781
+-----------------------------------------------------------------------------------------------------
+2023-06-17 21:49:40{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "symbol": "AMZN",
+        "nhead": 3,
+        "n_estimators": 10,
+        "objective": "binary:logistic",
+        "max_depth": 4,
+        "learning_rate": 0.1,
+        "subsample": 0.9,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0,
+        "reg_lambda": 1,
+        "random_state": 42,
+        "window_size": 7,
+        "output_step": 3,
+        "data_mode": 2,
+        "topk": 10,
+        "max_string_length": 500
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 100,
+        "learning_rate": 0.001,
+        "loss": "focal",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 100,
+        "patient": 600,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.001,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "n_estimators": [
+                10,
+                15,
+                20
+            ],
+            "learning_rate": [
+                0.1,
+                0.01,
+                0.001,
+                0.0001
+            ],
+            "subsample": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "colsample_bytree": [
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9
+            ],
+            "max_depth": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    }
+}
+Train evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.98      0.94      0.96        52
+          UP       0.94      0.98      0.96        50
+
+    accuracy                           0.96       102
+   macro avg       0.96      0.96      0.96       102
+weighted avg       0.96      0.96      0.96       102
+
+Confusion matrix:
+[[49  3]
+ [ 1 49]]
+----------------------------------------------------------------------------------------------------
+Train evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 3.9215688705444336
+-----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.67      0.70      0.68        23
+          UP       0.65      0.62      0.63        21
+
+    accuracy                           0.66        44
+   macro avg       0.66      0.66      0.66        44
+weighted avg       0.66      0.66      0.66        44
+
+Confusion matrix:
+[[16  7]
+ [ 8 13]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 34.090911865234375
+-----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.12      0.20        33
+          UP       0.45      0.89      0.60        27
+
+    accuracy                           0.47        60
+   macro avg       0.51      0.51      0.40        60
+weighted avg       0.52      0.47      0.38        60
+
+Confusion matrix:
+[[ 4 29]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 53.333335876464844
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.57      0.15      0.24        27
+          UP       0.51      0.89      0.65        27
+
+    accuracy                           0.52        54
+   macro avg       0.54      0.52      0.44        54
+weighted avg       0.54      0.52      0.44        54
+
+Confusion matrix:
+[[ 4 23]
+ [ 3 24]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate xgboost_AMZN_w7_o3_d2 BCE loss: 48.14814758300781
+-----------------------------------------------------------------------------------------------------

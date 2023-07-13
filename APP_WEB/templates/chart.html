@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Chart</title>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/indicators-all.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+    <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../static/js/chart.js"></script>
+    <link rel="stylesheet" href="../static/css/chart.css" />
+    <link rel="stylesheet" href="../static/css/analysisholo.css" />
+    
+</head>
+
+<body>
+    <!-- CANDLE STICK CHART -->
+    <section class="section">
+      <div class="main-wrapper is-transparent">
+          <div class="selectors-container">
+            <div class="col">
+              <label class="title is-4" for="overlays">Overlays:</label>
+              <select class="left-select select mt-4" id="overlays">
+                <option value="abands">Acceleration Bands</option>
+                <option value="bb">Bollinger Bands</option>
+                <option value="dema">DEMA (Double Exponential Moving Average)</option>
+                <option value="ema">EMA (Exponential Moving Average)</option>
+                <option value="ikh">Ichimoku Kinko Hyo</option>
+                <option value="keltnerchannels">Keltner Channels</option>
+                <option value="linearRegression">Linear Regression</option>
+                <option value="pivotpoints">Pivot Points</option>
+                <option value="pc" selected="selected">Price Channel</option>
+                <option value="priceenvelopes">Price Envelopes</option>
+                <option value="psar">PSAR (Parabolic SAR)</option>
+                <option value="sma">SMA (Simple Moving Average)</option>
+                <option value="supertrend">Super Trend</option>
+                <option value="tema">TEMA (Triple Exponential Moving Average)</option>
+                <option value="vbp">VbP (Volume by Price)</option>
+                <option value="vwap">WMA (Weighted Moving Average)</option>
+                <option value="wma">VWAP (Volume Weighted Average Price)</option>
+                <option value="zigzag">Zig Zag</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="title is-4" for="oscillators">Oscillators:</label>
+              <select class="right-select select mt-4" id="oscillators">
+                <option value="apo">Absolute price indicator</option>
+                <option value="ad">A/D (Accumulation/Distribution)</option>
+                <option value="aroon">Aroon</option>
+                <option value="aroonoscillator">Aroon oscillator</option>
+                <option value="atr">ATR (Average True Range)</option>
+                <option value="ao">Awesome oscillator</option>
+                <option value="cci">CCI (Commodity Channel Index)</option>
+                <option value="chaikin">Chaikin</option>
+                <option value="cmf">CMF (Chaikin Money Flow)</option>
+                <option value="disparityindex">Disparity Index</option>
+                <option value="cmo">CMO (Chande Momentum Oscillator)</option>
+                <option value="dmi">DMI (Directional Movement Index)</option>
+                <option value="dpo">Detrended price</option>
+                <option value="linearRegressionAngle">Linear Regression Angle</option>
+                <option value="linearRegressionIntercept">Linear Regression Intercept</option>
+                <option value="linearRegressionSlope">Linear Regression Slope</option>
+                <option value="klinger">Klinger Oscillator</option>
+                <option value="macd" selected="selected">MACD (Moving Average Convergence Divergence)</option>
+                <option value="mfi">MFI (Money Flow Index)</option>
+                <option value="momentum">Momentum</option>
+                <option value="natr">NATR (Normalized Average True Range)</option>
+                <option value="obv">OBV (On-Balance Volume)</option>
+                <option value="ppo">Percentage Price oscillator</option>
+                <option value="roc">RoC (Rate of Change)</option>
+                <option value="rsi">RSI (Relative Strength Index)</option>
+                <option value="slowstochastic">Slow Stochastic</option>
+                <option value="stochastic">Stochastic</option>
+                <option value="trix">TRIX</option>
+                <option value="williamsr">Williams %R</option>
+              </select>
+            </div>
+          </div>
+          <div id="candlechart"></div>
+        </div>
+
+
+
+
+      <!-- ANALYSIS HOLO 
+      <figure class="highcharts-figure">
+        <div id="parent-container">
+          <div id="play-controls">
+            <button id="play-pause-button" class="fa fa-play" title="play"></button>
+            <input id="play-range" type="range" value="1999" min="1999" max="2023" />
+          </div>
+          <div id="container"></div>
+        </div>
+      </figure>
+      -->
+      <!-- HTML !-->
+      <div class="has-text-center">
+        <select id="windowsize" class="button-select select">
+          <option value="">Window Size</option>
+          <option value=3>3</option>
+          <option value=7>7</option>
+          <option value=14>14</option>
+        </select>
+        <select id="outputsize" class="button-select select">
+          <option value="">Output Size</option>
+          <option value=3>3</option>
+          <option value=7>7</option>
+          <option value=14>14</option>
+        </select>
+        <select id="model" class="button-select select">
+          <option value="">Type of Model</option>
+          <option value='random_forest'>cc</option>
+          <option value='transformer'>db</option>
+          <option value='dk'>dk</option>
+        </select>
+      </div>
+
+      <div class="table-container">
+        <table class="styled-table" id="stockTable">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>LSTM - 1 day</th>
+              <th>SVM - 7 days</th>
+              <th>Transformer</th>
+              <th>Random Forest</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AAPL</td>
+              <td>172.10</td>
+              <td>Up</td>
+              <td>Down</td>
+              <td>Down</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+        
+      <div class="button-list">
+        <button class="button-65 b-apple" role="button" onclick="loadJSON('AAPL_signal.json')">APPLE</button>
+        <button class="button-65 b-microsoft" role="button" onclick="loadJSON('MSFT_signal.json')">MICROSOFT</button>
+        <button class="button-65 b-tesla" role="button" onclick="loadJSON('TSLA_signal.json')">TESLA</button>
+        <button class="button-65 b-google" role="button" onclick="loadJSON('GOOGL_signal.json')">GOOGLE</button>
+        <button class="button-65 b-amazon" role="button" onclick="loadJSON('AMZN_signal.json')">AMAZON</button>
+      </div>
+    </section>
+</body>
+
+<script>
+  function getValue() {
+      var windowElement = document.getElementById("windowsize");
+      var windowsize = windowElement.value;
+
+      var outputElement = document.getElementById("outputsize");
+      var outputsize = outputElement.value;
+
+      var modelElement = document.getElementById("model");
+      var model = modelElement.value;
+      return {windowsize:windowsize, 
+              outputsize:outputsize, 
+              model:model}
+  }
+  function loadJSON(filename) {
+    var symbol = filename.substring(0, filename.indexOf('_signal'));
+    console.log(symbol)
+    chart.getData(filename)
+      .then(function(data) {
+        chart.currentData = data; // Store the loaded data in the chart object
+        chart.build(symbol); // Rebuild the chart using the new data
+        chart.renderDataToTable(symbol);
+      })
+      .catch(function(error) {
+        console.error('Error:', error);
+      });
+    }
+  
+
+</script>
+
+
+
+</html>

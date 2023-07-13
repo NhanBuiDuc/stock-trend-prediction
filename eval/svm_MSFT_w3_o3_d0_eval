@@ -1,0 +1,552 @@
+2023-06-18 18:24:02{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "C": 1000,
+        "kernel": "poly",
+        "gamma": "scale",
+        "coef0": 100,
+        "class_weight": {
+            "0": 0.5,
+            "1": 0.5
+        },
+        "window_size": 3,
+        "output_step": 3,
+        "data_mode": 0,
+        "topk": 10,
+        "symbol": "MSFT",
+        "max_string_length": 500
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 300,
+        "learning_rate": 0.001,
+        "loss": "bce",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 50,
+        "patient": 500,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.0001,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "C": [
+                1000.0,
+                10000.0,
+                100000.0
+            ],
+            "gamma": [
+                0.001,
+                0.01,
+                0.1
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    }
+}
+Train evaluate svm_MSFT_w3_o3_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.70      0.69      0.69        51
+          UP       0.69      0.71      0.70        51
+
+    accuracy                           0.70       102
+   macro avg       0.70      0.70      0.70       102
+weighted avg       0.70      0.70      0.70       102
+
+Confusion matrix:
+[[35 16]
+ [15 36]]
+----------------------------------------------------------------------------------------------------
+Train evaluate svm_MSFT_w3_o3_d0 BCE loss: 30.39215850830078
+-----------------------------------------------------------------------------------------------------
+Valid evaluate svm_MSFT_w3_o3_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.59      0.86      0.70        22
+          UP       0.75      0.41      0.53        22
+
+    accuracy                           0.64        44
+   macro avg       0.67      0.64      0.62        44
+weighted avg       0.67      0.64      0.62        44
+
+Confusion matrix:
+[[19  3]
+ [13  9]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate svm_MSFT_w3_o3_d0 BCE loss: 36.3636360168457
+-----------------------------------------------------------------------------------------------------
+Test evaluate svm_MSFT_w3_o3_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.40      0.76      0.53        25
+          UP       0.54      0.20      0.29        35
+
+    accuracy                           0.43        60
+   macro avg       0.47      0.48      0.41        60
+weighted avg       0.48      0.43      0.39        60
+
+Confusion matrix:
+[[19  6]
+ [28  7]]
+----------------------------------------------------------------------------------------------------
+Test evaluate svm_MSFT_w3_o3_d0 BCE loss: 56.66666793823242
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate svm_MSFT_w3_o3_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.47      0.60      0.53        25
+          UP       0.44      0.32      0.37        25
+
+    accuracy                           0.46        50
+   macro avg       0.46      0.46      0.45        50
+weighted avg       0.46      0.46      0.45        50
+
+Confusion matrix:
+[[15 10]
+ [17  8]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate svm_MSFT_w3_o3_d0 BCE loss: 54.0
+-----------------------------------------------------------------------------------------------------
+2023-06-18 18:24:45{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:null
+Learning rate:null
+{
+    "model": {
+        "C": 1000,
+        "kernel": "poly",
+        "gamma": "scale",
+        "coef0": 100,
+        "class_weight": {
+            "0": 0.5,
+            "1": 0.5
+        },
+        "window_size": 3,
+        "output_step": 3,
+        "data_mode": 0,
+        "topk": 10,
+        "symbol": "MSFT",
+        "max_string_length": 500
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 300,
+        "learning_rate": 0.001,
+        "loss": "bce",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 50,
+        "patient": 500,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.0001,
+        "param_grid": {
+            "data_mode": [
+                0,
+                1,
+                2
+            ],
+            "window_size": [
+                3,
+                7,
+                14
+            ],
+            "output_size": [
+                3,
+                7,
+                14
+            ],
+            "C": [
+                1000.0,
+                10000.0,
+                100000.0
+            ],
+            "gamma": [
+                0.001,
+                0.01,
+                0.1
+            ],
+            "max_string_length": [
+                500,
+                1000,
+                10000,
+                20000
+            ]
+        }
+    }
+}
+Train evaluate svm_MSFT_w3_o3_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.70      0.69      0.69        51
+          UP       0.69      0.71      0.70        51
+
+    accuracy                           0.70       102
+   macro avg       0.70      0.70      0.70       102
+weighted avg       0.70      0.70      0.70       102
+
+Confusion matrix:
+[[35 16]
+ [15 36]]
+----------------------------------------------------------------------------------------------------
+Train evaluate svm_MSFT_w3_o3_d0 BCE loss: 30.39215850830078
+-----------------------------------------------------------------------------------------------------
+Valid evaluate svm_MSFT_w3_o3_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.59      0.86      0.70        22
+          UP       0.75      0.41      0.53        22
+
+    accuracy                           0.64        44
+   macro avg       0.67      0.64      0.62        44
+weighted avg       0.67      0.64      0.62        44
+
+Confusion matrix:
+[[19  3]
+ [13  9]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate svm_MSFT_w3_o3_d0 BCE loss: 36.3636360168457
+-----------------------------------------------------------------------------------------------------
+Test evaluate svm_MSFT_w3_o3_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.40      0.76      0.53        25
+          UP       0.54      0.20      0.29        35
+
+    accuracy                           0.43        60
+   macro avg       0.47      0.48      0.41        60
+weighted avg       0.48      0.43      0.39        60
+
+Confusion matrix:
+[[19  6]
+ [28  7]]
+----------------------------------------------------------------------------------------------------
+Test evaluate svm_MSFT_w3_o3_d0 BCE loss: 56.66666793823242
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate svm_MSFT_w3_o3_d0
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.47      0.60      0.53        25
+          UP       0.44      0.32      0.37        25
+
+    accuracy                           0.46        50
+   macro avg       0.46      0.46      0.45        50
+weighted avg       0.46      0.46      0.45        50
+
+Confusion matrix:
+[[15 10]
+ [17  8]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate svm_MSFT_w3_o3_d0 BCE loss: 54.0
+-----------------------------------------------------------------------------------------------------

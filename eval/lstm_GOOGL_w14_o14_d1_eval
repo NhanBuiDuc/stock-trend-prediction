@@ -1,0 +1,248 @@
+2023-06-07 20:37:29{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "transformer",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:41
+Learning rate:41
+{
+    "model": {
+        "num_layers": 10,
+        "hidden_size": 20,
+        "drop_out": 0.5,
+        "window_size": 14,
+        "output_step": 14,
+        "conv1D_param": {
+            "type": 1,
+            "kernel_size": 4,
+            "dilation_base": 3,
+            "max_pooling_kernel_size": 2,
+            "sub_small_num_layer": 1,
+            "sub_big_num_layer": 1,
+            "sub_small_kernel_size": 3,
+            "sub_big_kernel_size": 30,
+            "output_size": 20
+        },
+        "symbol": "GOOGL",
+        "topk": 10,
+        "data_mode": 1
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 100,
+        "learning_rate": 0.001,
+        "loss": "bce",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 50,
+        "patient": 100,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.0001
+    }
+}
+Train evaluate lstm_GOOGL_w14_o14_d1
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.63      1.00      0.77        52
+          UP       0.00      0.00      0.00        31
+
+    accuracy                           0.63        83
+   macro avg       0.31      0.50      0.39        83
+weighted avg       0.39      0.63      0.48        83
+
+Confusion matrix:
+[[52  0]
+ [31  0]]
+----------------------------------------------------------------------------------------------------
+Train evaluate lstm_GOOGL_w14_o14_d1 BCE loss: 47.79595947265625
+-----------------------------------------------------------------------------------------------------
+Valid evaluate lstm_GOOGL_w14_o14_d1
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.67      1.00      0.80        24
+          UP       0.00      0.00      0.00        12
+
+    accuracy                           0.67        36
+   macro avg       0.33      0.50      0.40        36
+weighted avg       0.44      0.67      0.53        36
+
+Confusion matrix:
+[[24  0]
+ [12  0]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate lstm_GOOGL_w14_o14_d1 BCE loss: 45.23575210571289
+-----------------------------------------------------------------------------------------------------
+Test evaluate lstm_GOOGL_w14_o14_d1
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.14      1.00      0.24         5
+          UP       0.00      0.00      0.00        31
+
+    accuracy                           0.14        36
+   macro avg       0.07      0.50      0.12        36
+weighted avg       0.02      0.14      0.03        36
+
+Confusion matrix:
+[[ 5  0]
+ [31  0]]
+----------------------------------------------------------------------------------------------------
+Test evaluate lstm_GOOGL_w14_o14_d1 BCE loss: 58.29104232788086
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate lstm_GOOGL_w14_o14_d1
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.50      1.00      0.67         5
+          UP       0.00      0.00      0.00         5
+
+    accuracy                           0.50        10
+   macro avg       0.25      0.50      0.33        10
+weighted avg       0.25      0.50      0.33        10
+
+Confusion matrix:
+[[5 0]
+ [5 0]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate lstm_GOOGL_w14_o14_d1 BCE loss: 49.03725814819336
+-----------------------------------------------------------------------------------------------------

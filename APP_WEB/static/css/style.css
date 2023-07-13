@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.speedometer-container {
+    width: 300px;
+    height: 300px;
+    border: 3px solid black;
+    border-radius: 50%;
+    border-right: 3px solid red;
+    border-left: 3px solid green;
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    justify-content: space-between;
+    /* margin-left: 100px; */
+}
+
+
+.center-point {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 137px;
+    left: 137px;
+}
+
+.speedometer-bottom-hide {
+    width: 320px;
+    height: 10rem;
+    background-color: white;
+    position: absolute;
+    z-index: 11;
+    top: 160px;
+    left: -14px;
+}
+
+.arrow-container {
+    width: 160px;
+    height: 160px;
+    background-color: transparent;
+    position: absolute;
+    z-index: 12;
+    top: 67px;
+    left: 67px;
+}
+
+.arrow-wrapper {
+    width: 160px;
+    height: 160px;
+    background-color: transparent;
+    position: relative;
+    transition: all 0.4s;
+}
+
+.arrow {
+    width: 110px;
+    height: 4px;
+    background-color: black;
+    position: absolute;
+    top: 78px;
+    left: -30px;
+}
+
+.speed-30 {
+    transform: rotate(30deg);
+}
+
+.speed-60 {
+    transform: rotate(60deg);
+}
+
+.speed-90 {
+    transform: rotate(90deg);
+}
+
+.speed-120 {
+    transform: rotate(120deg);
+}
+
+.speed-150 {
+    transform: rotate(150deg);
+}
+
+.speedometer-text {
+    width: 180px;
+    position: absolute;
+    z-index: 12;
+    left: 58px;
+    top: 170px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.speedometer-text-2 {
+    font-size: 1rem;
+    width: 180px;
+    position: absolute;
+    z-index: 12;
+    left: -37px;
+    top: 226px;
+    text-align: center;
+}
+
+.speedometer-text-3 {
+    width: 180px;
+    position: absolute;
+    z-index: 12;
+    left: 62px;
+    top: 226px;
+    text-align: center;
+}
+
+.speedometer-text-4 {
+    width: 180px;
+    position: absolute;
+    z-index: 12;
+    left: 174px;
+    top: 226px;
+    text-align: center;
+}
+
+.title {
+    font-size: 30px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-size: 90%;
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 25px;
+    border-bottom: 1px solid #ccc;
+}
+
+.control,
+li {
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.bottom {
+    /* margin-top: 100px;
+    margin-left: 20px;
+    display: inline-block; */
+    float: left;
+    padding-left: 20px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 10px;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 600px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.name {
+    text-align: center;
+    font-size: larger;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    margin: 20px auto;
+}
+
+.slidecontainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.behind {
+    margin-bottom: 200px;
+}
+
+.option {
+    font-family: monospace;
+    width: 150px;
+    height: 50px;
+}
+
+.option option {
+    color: #000 !important;
+}
+
+.firsttable {
+    /* margin-left: 20%; */
+}
+
+.secondtable {
+    /* margin-left: 60%; */
+}
+
+#sel {
+    width: 15rem;
+    padding: 1rem;
+    font-size: 1rem;
+    height: fit-content;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(45deg, #00800182, #ff00008c);
+    border: none;
+    border-radius: 10px;
+}

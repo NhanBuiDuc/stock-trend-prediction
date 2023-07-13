@@ -1,0 +1,17 @@
+API_news:fa24ffdbf32f4feeb3ef755fad66a2bd
+twitter key: wrn4kinBieG2SZ74o9pzPAnra
+twitter secret: yUNgSd9mx4m1W1JNS9a848Lm8TlueSeUBUQik12fFcpzGtkYkD
+
+twitter bearer token:
+AAAAAAAAAAAAAAAAAAAAALmHnAEAAAAABQwRUNxXsqL%2B7be1QEfurPRrD7Q%3D7W6hWoposT4qQBomydQZbXpnJlCujz9z8Bm5c6hW9moLy5fNHp
+Access Token: 
+1652768162256162816-eldHcAdcsajo0WH0eyquH1rgQcpH1Z
+Access Token Secret:
+iMXwExuRJfdlFO239cHkcH8AZLY2A90o9rM4grQXr891z
+Weather:
+b7a439cb870a4a09be9114748230705
+
+
+#### API finnhub: chdrr1pr01qi6ghjsatgchdrr1pr01qi6ghjsau0
+
+#### API Benzinga: 936c241cdb1b4620b3bad6c77ba3ae4b

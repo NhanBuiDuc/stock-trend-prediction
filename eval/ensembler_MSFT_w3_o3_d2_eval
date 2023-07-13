@@ -1,0 +1,900 @@
+2023-07-09 21:41:12{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:49
+Learning rate:49
+{
+    "model": {
+        "symbol": "MSFT",
+        "nhead": 3,
+        "num_encoder_layers": 20,
+        "dim_feedforward": 20,
+        "dropout": 0.5,
+        "window_size": 3,
+        "output_step": 3,
+        "data_mode": 2,
+        "topk": 10,
+        "max_string_length": 500,
+        "svm_drop_out_rate": 0.2,
+        "rfc_drop_out_rate": 0.2,
+        "xgboost_drop_out_rate": 0.2,
+        "lstm_drop_out_rate": 0.2,
+        "news_drop_out_rate": 0.2,
+        "ensembled_model": {
+            "random_forest": 2,
+            "svm": -1,
+            "xgboost": 2,
+            "lstm": -1,
+            "news": 2
+        }
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 50,
+        "learning_rate": 0.001,
+        "loss": "bce",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 100,
+        "patient": 600,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.001,
+        "param_grid": {
+            "drop_out": [
+                0,
+                0.2,
+                0.5
+            ],
+            "AAPL": {
+                "3": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "random_forest": 1,
+                        "svm": 1,
+                        "xgboost": 1,
+                        "lstm": 0,
+                        "news": 2
+                    }
+                },
+                "7": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "random_forest": 2,
+                        "svm": 1,
+                        "xgboost": 1,
+                        "lstm": 0,
+                        "news": 2
+                    }
+                },
+                "14": {
+                    "window_size": 14,
+                    "ensembled_model": {
+                        "random_forest": 0,
+                        "svm": 1,
+                        "xgboost": 1,
+                        "lstm": 2,
+                        "news": 0
+                    }
+                }
+            },
+            "AMZN": {
+                "3": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 2,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                },
+                "7": {
+                    "window_size": 14,
+                    "ensembled_model": {
+                        "svm": 1,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 1,
+                        "news": 2
+                    }
+                },
+                "14": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 0,
+                        "xgboost": 1,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                }
+            },
+            "GOOGL": {
+                "3": {
+                    "window_size": 3,
+                    "ensembled_model": {
+                        "svm": 0,
+                        "random_forest": 1,
+                        "xgboost": 2,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                },
+                "7": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                },
+                "14": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 1,
+                        "news": 2
+                    }
+                }
+            },
+            "MSFT": {
+                "3": {
+                    "window_size": 3,
+                    "ensembled_model": {
+                        "svm": 0,
+                        "random_forest": 2,
+                        "xgboost": 2,
+                        "lstm": 2,
+                        "news": 0
+                    }
+                },
+                "7": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                },
+                "14": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 1,
+                        "news": 0
+                    }
+                }
+            },
+            "TSLA": {
+                "3": {
+                    "window_size": 3,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 1,
+                        "news": 0
+                    }
+                },
+                "7": {
+                    "window_size": 14,
+                    "ensembled_model": {
+                        "svm": 1,
+                        "random_forest": 0,
+                        "xgboost": 2,
+                        "lstm": 2,
+                        "news": 0
+                    }
+                },
+                "14": {
+                    "window_size": 14,
+                    "ensembled_model": {
+                        "svm": 1,
+                        "random_forest": 0,
+                        "xgboost": 1,
+                        "lstm": 0,
+                        "news": 2
+                    }
+                }
+            }
+        },
+        "dropout_list": {
+            "svm": [
+                0,
+                0.2,
+                0,
+                5
+            ],
+            "random_forest": [
+                0,
+                0.2,
+                0,
+                5
+            ],
+            "xgboost": [
+                0,
+                0.2,
+                0,
+                5
+            ],
+            "lstm": [
+                0,
+                0.2,
+                0,
+                5
+            ],
+            "news": [
+                0,
+                0.2,
+                0,
+                5
+            ]
+        }
+    }
+}
+Train evaluate ensembler_MSFT_w3_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.49      1.00      0.66        48
+          UP       0.00      0.00      0.00        50
+
+    accuracy                           0.49        98
+   macro avg       0.24      0.50      0.33        98
+weighted avg       0.24      0.49      0.32        98
+
+Confusion matrix:
+[[48  0]
+ [50  0]]
+----------------------------------------------------------------------------------------------------
+Train evaluate ensembler_MSFT_w3_o3_d2 BCE loss: 52.268211364746094
+-----------------------------------------------------------------------------------------------------
+Valid evaluate ensembler_MSFT_w3_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.56      1.00      0.72        24
+          UP       0.00      0.00      0.00        19
+
+    accuracy                           0.56        43
+   macro avg       0.28      0.50      0.36        43
+weighted avg       0.31      0.56      0.40        43
+
+Confusion matrix:
+[[24  0]
+ [19  0]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate ensembler_MSFT_w3_o3_d2 BCE loss: 52.19789123535156
+-----------------------------------------------------------------------------------------------------
+Test evaluate ensembler_MSFT_w3_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.43      1.00      0.60        25
+          UP       0.00      0.00      0.00        33
+
+    accuracy                           0.43        58
+   macro avg       0.22      0.50      0.30        58
+weighted avg       0.19      0.43      0.26        58
+
+Confusion matrix:
+[[25  0]
+ [33  0]]
+----------------------------------------------------------------------------------------------------
+Test evaluate ensembler_MSFT_w3_o3_d2 BCE loss: 53.10062026977539
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate ensembler_MSFT_w3_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.50      1.00      0.67        25
+          UP       0.00      0.00      0.00        25
+
+    accuracy                           0.50        50
+   macro avg       0.25      0.50      0.33        50
+weighted avg       0.25      0.50      0.33        50
+
+Confusion matrix:
+[[25  0]
+ [25  0]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate ensembler_MSFT_w3_o3_d2 BCE loss: 50.45963668823242
+-----------------------------------------------------------------------------------------------------
+2023-07-09 22:13:45{
+    "alpha_vantage": {
+        "api_key": "XOLA7URKCZHU7C9X",
+        "output_size": "full",
+        "url": "https://www.alphavantage.co",
+        "key_adjusted_close": "5. adjusted close"
+    },
+    "data": {
+        "train_test_split_size": 0.7,
+        "train_val_split_size": 0.7,
+        "smoothing": 2
+    },
+    "plots": {
+        "show_plots": false,
+        "xticks_interval": 90,
+        "color_actual_val": "#001f3f",
+        "color_actual_test": "#4D1BF3",
+        "color_train": "#3D9970",
+        "color_val": "#0074D9",
+        "color_pred_train": "#3D9970",
+        "color_pred_val": "#0074D9",
+        "color_pred_test": "#FF4136"
+    },
+    "model": {
+        "magnitude_1": {
+            "lstm_num_layers": 4.5,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.4,
+            "output_step": 1,
+            "window_size": 14,
+            "conv1d_kernel_size": 4,
+            "dilation_base": 3
+        },
+        "LSTM_bench_mark_1": {
+            "lstm_num_layer": 1,
+            "lstm_hidden_layer_size": 64,
+            "drop_out": 0.2,
+            "output_step": 1,
+            "window_size": 14
+        },
+        "GRU_bench_mark_1": {
+            "hidden_size": 64,
+            "output_step": 1,
+            "window_size": 14
+        }
+    },
+    "training": {
+        "magnitude_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1,
+            "learning_rate": 0.001,
+            "loss": "mse",
+            "evaluate": [
+                "mse",
+                "mae"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 200,
+            "from": "2021-01-01",
+            "to": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true
+        },
+        "LSTM_bench_mark_1": {
+            "device": "cuda",
+            "batch_size": 64,
+            "num_epoch": 1000,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 500,
+            "patient": 1000,
+            "start": "2000-5-01",
+            "end": null,
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.1
+        },
+        "svm_1": {
+            "batch_size": 64,
+            "num_epoch": 300,
+            "learning_rate": 0.01,
+            "loss": "bce",
+            "evaluate": [
+                "bce",
+                "accuracy",
+                "precision",
+                "f1"
+            ],
+            "optimizer": "adam",
+            "scheduler_step_size": 50,
+            "patient": 1000,
+            "start": "2022-07-01",
+            "end": "2023-05-01",
+            "best_model": true,
+            "early_stop": true,
+            "train_shuffle": true,
+            "val_shuffle": true,
+            "test_shuffle": true,
+            "weight_decay": 0.5
+        }
+    },
+    "pytorch_timeseries_model_type_dict": {
+        "1": "movement",
+        "2": "magnitude",
+        "3": "assembler",
+        "4": "lstm",
+        "5": "gru",
+        "6": "ensembler",
+        "7": "pred_price_LSTM"
+    },
+    "tensorflow_timeseries_model_type_dict": {
+        "1": "svm",
+        "2": "random_forest",
+        "3": "xgboost"
+    }
+}
+Epoch:49
+Learning rate:49
+{
+    "model": {
+        "symbol": "MSFT",
+        "nhead": 3,
+        "num_encoder_layers": 20,
+        "dim_feedforward": 20,
+        "dropout": 0.5,
+        "window_size": 3,
+        "output_step": 3,
+        "data_mode": 2,
+        "topk": 10,
+        "max_string_length": 500,
+        "svm_drop_out_rate": 0.2,
+        "rfc_drop_out_rate": 0.2,
+        "xgboost_drop_out_rate": 0.2,
+        "lstm_drop_out_rate": 0.2,
+        "news_drop_out_rate": 0.2,
+        "ensembled_model": {
+            "random_forest": 2,
+            "svm": -1,
+            "xgboost": 2,
+            "lstm": -1,
+            "news": -1
+        }
+    },
+    "training": {
+        "device": "cuda",
+        "batch_size": 64,
+        "num_epoch": 50,
+        "learning_rate": 0.001,
+        "loss": "bce",
+        "evaluate": [
+            "bce",
+            "accuracy",
+            "precision",
+            "f1"
+        ],
+        "optimizer": "adam",
+        "scheduler_step_size": 100,
+        "patient": 600,
+        "start": "2022-07-01",
+        "end": "2023-05-01",
+        "best_model": true,
+        "early_stop": true,
+        "train_shuffle": true,
+        "val_shuffle": true,
+        "test_shuffle": true,
+        "weight_decay": 0.001,
+        "param_grid": {
+            "drop_out": [
+                0,
+                0.2,
+                0.5
+            ],
+            "AAPL": {
+                "3": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "random_forest": 1,
+                        "svm": 1,
+                        "xgboost": 1,
+                        "lstm": 0,
+                        "news": 2
+                    }
+                },
+                "7": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "random_forest": 2,
+                        "svm": 1,
+                        "xgboost": 1,
+                        "lstm": 0,
+                        "news": 2
+                    }
+                },
+                "14": {
+                    "window_size": 14,
+                    "ensembled_model": {
+                        "random_forest": 0,
+                        "svm": 1,
+                        "xgboost": 1,
+                        "lstm": 2,
+                        "news": 0
+                    }
+                }
+            },
+            "AMZN": {
+                "3": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 2,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                },
+                "7": {
+                    "window_size": 14,
+                    "ensembled_model": {
+                        "svm": 1,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 1,
+                        "news": 2
+                    }
+                },
+                "14": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 0,
+                        "xgboost": 1,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                }
+            },
+            "GOOGL": {
+                "3": {
+                    "window_size": 3,
+                    "ensembled_model": {
+                        "svm": 0,
+                        "random_forest": 1,
+                        "xgboost": 2,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                },
+                "7": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                },
+                "14": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 1,
+                        "news": 2
+                    }
+                }
+            },
+            "MSFT": {
+                "3": {
+                    "window_size": 3,
+                    "ensembled_model": {
+                        "svm": 0,
+                        "random_forest": 2,
+                        "xgboost": 2,
+                        "lstm": 2,
+                        "news": 0
+                    }
+                },
+                "7": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 2,
+                        "news": 2
+                    }
+                },
+                "14": {
+                    "window_size": 7,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 1,
+                        "news": 0
+                    }
+                }
+            },
+            "TSLA": {
+                "3": {
+                    "window_size": 3,
+                    "ensembled_model": {
+                        "svm": 2,
+                        "random_forest": 1,
+                        "xgboost": 1,
+                        "lstm": 1,
+                        "news": 0
+                    }
+                },
+                "7": {
+                    "window_size": 14,
+                    "ensembled_model": {
+                        "svm": 1,
+                        "random_forest": 0,
+                        "xgboost": 2,
+                        "lstm": 2,
+                        "news": 0
+                    }
+                },
+                "14": {
+                    "window_size": 14,
+                    "ensembled_model": {
+                        "svm": 1,
+                        "random_forest": 0,
+                        "xgboost": 1,
+                        "lstm": 0,
+                        "news": 2
+                    }
+                }
+            }
+        },
+        "dropout_list": {
+            "svm": [
+                0,
+                0.2,
+                0,
+                5
+            ],
+            "random_forest": [
+                0,
+                0.2,
+                0,
+                5
+            ],
+            "xgboost": [
+                0,
+                0.2,
+                0,
+                5
+            ],
+            "lstm": [
+                0,
+                0.2,
+                0,
+                5
+            ],
+            "news": [
+                0,
+                0.2,
+                0,
+                5
+            ]
+        }
+    }
+}
+Train evaluate ensembler_MSFT_w3_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.00      0.00      0.00        48
+          UP       0.51      1.00      0.68        50
+
+    accuracy                           0.51        98
+   macro avg       0.26      0.50      0.34        98
+weighted avg       0.26      0.51      0.34        98
+
+Confusion matrix:
+[[ 0 48]
+ [ 0 50]]
+----------------------------------------------------------------------------------------------------
+Train evaluate ensembler_MSFT_w3_o3_d2 BCE loss: 49.44771194458008
+-----------------------------------------------------------------------------------------------------
+Valid evaluate ensembler_MSFT_w3_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.00      0.00      0.00        24
+          UP       0.44      1.00      0.61        19
+
+    accuracy                           0.44        43
+   macro avg       0.22      0.50      0.31        43
+weighted avg       0.20      0.44      0.27        43
+
+Confusion matrix:
+[[ 0 24]
+ [ 0 19]]
+----------------------------------------------------------------------------------------------------
+Valid evaluate ensembler_MSFT_w3_o3_d2 BCE loss: 50.75471115112305
+-----------------------------------------------------------------------------------------------------
+Test evaluate ensembler_MSFT_w3_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.00      0.00      0.00        25
+          UP       0.57      1.00      0.73        33
+
+    accuracy                           0.57        58
+   macro avg       0.28      0.50      0.36        58
+weighted avg       0.32      0.57      0.41        58
+
+Confusion matrix:
+[[ 0 25]
+ [ 0 33]]
+----------------------------------------------------------------------------------------------------
+Test evaluate ensembler_MSFT_w3_o3_d2 BCE loss: 49.071205139160156
+-----------------------------------------------------------------------------------------------------
+Balanced Test evaluate ensembler_MSFT_w3_o3_d2
+Classification report:
+              precision    recall  f1-score   support
+
+        DOWN       0.00      0.00      0.00        25
+          UP       0.50      1.00      0.67        25
+
+    accuracy                           0.50        50
+   macro avg       0.25      0.50      0.33        50
+weighted avg       0.25      0.50      0.33        50
+
+Confusion matrix:
+[[ 0 25]
+ [ 0 25]]
+----------------------------------------------------------------------------------------------------
+Balanced Test evaluate ensembler_MSFT_w3_o3_d2 BCE loss: 50.54822540283203
+-----------------------------------------------------------------------------------------------------
